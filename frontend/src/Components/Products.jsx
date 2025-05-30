@@ -4,8 +4,6 @@ import { BsPencilSquare, BsFillTrashFill } from 'react-icons/bs';
 import Laptop from '../assets/Laptop.jpg';
 import headphone from '../assets/headphone.jpg';
 import watch from '../assets/watch.jpg';
-
-
 const productList = [
   {
     id: 1,
@@ -29,10 +27,8 @@ const productList = [
     image: Laptop
   }
 ];
-
 const ProductList = () => {
   const [items] = useState(productList);
-
   return (
     <Container style={{ padding: '2rem 0' }}>
       <div className="d-flex justify-content-between align-items-center mb-3">

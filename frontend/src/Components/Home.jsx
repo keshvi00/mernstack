@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import checklist from '../assets/checklist.png';
-
 const HomePage = () => {
   return (
     <section
@@ -32,7 +31,7 @@ const HomePage = () => {
         <Col xs={12} md={6} className="text-center mt-4 mt-md-0">
           <img
             src="src\assets\checklist.png"
-            alt="Checklist"
+            alt="checklist"
             style={{ maxWidth: '50%', height: 'auto' }}
           />
         </Col>

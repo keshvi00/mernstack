@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
 function AppNavbar() {
   return (
     <Navbar bg="light" variant="light" expand="lg" className="shadow-sm">
