@@ -30,7 +30,8 @@ const HomePage = () => {
         </Col>
         <Col xs={12} md={6} className="text-center mt-4 mt-md-0">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png"
+            src="http://www.pngall.com/wp-content/uploads/5/Vector-Checklist-PNG-Free-Download.png"
+
             alt="Checklist"
             style={{ maxWidth: '50%', height: 'auto' }}
           />
