@@ -5,15 +5,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from './Components/Home.jsx';
 import Navbar from './Components/Navbar.jsx';
 import Products from './Components/Products.jsx';
-
-
-
 import './App.css'
-import Contact from './Components/Contact.jsX';
-
+import Contact from './Components/Contact.jsx';
 function App() {
   const [count, setCount] = useState(0)
-
   return (
     <Router>
       <div className="App">
