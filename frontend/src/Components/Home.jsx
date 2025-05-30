@@ -1,13 +1,13 @@
 import React from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import checklist from '../assets/checklist.png';
+
 const HomePage = () => {
   return (
     <section
       style={{
         minHeight: '100vh',
-        background: 'linear-gradient(90deg,rgb(57, 103, 190), #2a5298)',
+        background: 'linear-gradient(90deg, rgb(57, 103, 190), #2a5298)',
         color: '#fff',
         display: 'flex',
         alignItems: 'center',
@@ -30,8 +30,8 @@ const HomePage = () => {
         </Col>
         <Col xs={12} md={6} className="text-center mt-4 mt-md-0">
           <img
-            src="src\assets\checklist.png"
-            alt="checklist"
+            src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png"
+            alt="Checklist"
             style={{ maxWidth: '50%', height: 'auto' }}
           />
         </Col>
