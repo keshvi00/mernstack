@@ -1,60 +1,96 @@
-import React, { useState } from 'react';
-import { Row, Col, Card, Button, Container } from 'react-bootstrap';
-import { BsPencilSquare, BsFillTrashFill } from 'react-icons/bs';
-import Laptop from '../assets/Laptop.jpg';
-import headphone from '../assets/headphone.jpg';
-import watch from '../assets/watch.jpg';
-const productList = [
-  {
-    id: 1,
-    name: 'Wireless Headphones',
-    description: 'Noise-cancelling over-ear headphones',
-    cost: '$120',
-    image: headphone
-  },
-  {
-    id: 2,
-    name: 'Smart Watch',
-    description: 'Smart wearable device with health tracking',
-    cost: '$80',
-    image: watch
-  },
-  {
-    id: 3,
-    name: 'Laptop',
-    description: '14-inch Full HD display, 256GB SSD',
-    cost: '$600',
-    image: Laptop
-  }
-];
-const ProductList = () => {
-  const [items] = useState(productList);
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchProducts,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} from '../redux/actions/productActions';
+import ProductFormModal from './ProductFormModal';
+import { Button, Spinner, Card, Row, Col } from 'react-bootstrap';
+import { BsPencil, BsTrash } from 'react-icons/bs';
+
+const Products = () => {
+  const dispatch = useDispatch();
+  const { products, loading } = useSelector((state) => state.products);
+
+  const [showModal, setShowModal] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+  const handleAdd = () => {
+    setEditingProduct({ title: '', image: '', description: '', price: '' });
+    setShowModal(true);
+  };
+
+  const handleEdit = (product) => {
+    setEditingProduct(product);
+    setShowModal(true);
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete?')) {
+      dispatch(deleteProduct(id));
+    }
+  };
+
+  const handleSubmit = (productData) => {
+    if (productData.id) {
+      dispatch(updateProduct(productData));
+    } else {
+      dispatch(createProduct(productData));
+    }
+  };
+
   return (
-    <Container style={{ padding: '2rem 0' }}>
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Our Products</h2>
-        <Button variant="success">Add Product</Button>
-      </div>
+    <div className="container mt-4">
+      <h2>Product Management</h2>
+      <Button onClick={handleAdd} className="mb-3">
+        Add Product
+      </Button>
+
+      {loading && <Spinner animation="border" />}
+
       <Row>
-        {items.map((item) => (
-          <Col xs={12} md={4} key={item.id} className="mb-4">
-            <Card className="shadow-sm">
-              <Card.Img variant="top" src={item.image} alt={item.name} />
+        {products.map((product) => (
+          <Col md={4} key={product.id} className="mb-3">
+            <Card>
+              <Card.Img variant="top" src={product.image} height="150" />
               <Card.Body>
-                <Card.Title>{item.name}</Card.Title>
-                <Card.Text>{item.description}</Card.Text>
-                <h5 style={{ color: '#198754' }}>{item.cost}</h5>
-                <div className="d-flex justify-content-end gap-2 mt-2">
-                  <BsPencilSquare style={{ cursor: 'pointer' }} />
-                  <BsFillTrashFill style={{ cursor: 'pointer', color: 'crimson' }} />
-                </div>
+                <Card.Title>{product.title}</Card.Title>
+                <Card.Text>{product.description}</Card.Text>
+                <Card.Text><strong>Price:</strong> ${product.price}</Card.Text>
+                <Button
+                  variant="outline-primary"
+                  size="sm"
+                  onClick={() => handleEdit(product)}
+                >
+                  <BsPencil /> Edit
+                </Button>{' '}
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  onClick={() => handleDelete(product.id)}
+                >
+                  <BsTrash /> Delete
+                </Button>
               </Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
-    </Container>
+
+      <ProductFormModal
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        onSubmit={handleSubmit}
+        initialValues={editingProduct || { title: '', image: '', description: '', price: '' }}
+      />
+    </div>
   );
 };
 
-export default ProductList;
+export default Products;
