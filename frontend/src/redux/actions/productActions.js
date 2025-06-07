@@ -7,7 +7,7 @@ import {
 
 import { toast } from 'react-toastify';
 
-const API_URL = 'http://localhost:5000/api/products';
+const API_URL = 'https://mernstack-feiy.onrender.com/api/products';
 
 export const fetchProducts = () => async (dispatch) => {
   dispatch({ type: READ_PRODUCTS_REQUEST });
