@@ -7,7 +7,7 @@ import {
 
 import { toast } from 'react-toastify';
 
-const API_URL = 'https://mernstack-feiy.onrender.com/api/products';
+const API_URL = 'http://localhost:5000/api/products'; // ✅ LOCAL MongoDB backend
 
 export const fetchProducts = () => async (dispatch) => {
   dispatch({ type: READ_PRODUCTS_REQUEST });
@@ -41,7 +41,7 @@ export const createProduct = (product) => async (dispatch) => {
 export const updateProduct = (product) => async (dispatch) => {
   dispatch({ type: UPDATE_PRODUCT_REQUEST });
   try {
-    const res = await fetch(`${API_URL}/${product.id}`, {
+    const res = await fetch(`${API_URL}/${product._id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(product),

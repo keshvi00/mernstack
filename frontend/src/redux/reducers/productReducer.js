@@ -1,4 +1,3 @@
-// src/redux/reducers/productReducer.js
 import {
   CREATE_PRODUCT_REQUEST, CREATE_PRODUCT_SUCCESS, CREATE_PRODUCT_FAILURE,
   READ_PRODUCTS_REQUEST, READ_PRODUCTS_SUCCESS, READ_PRODUCTS_FAILURE,
@@ -31,7 +30,7 @@ export const productReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         products: state.products.map((p) =>
-          p.id === action.payload.id ? action.payload : p
+          p._id === action.payload._id ? action.payload : p
         ),
       };
 
@@ -39,7 +38,7 @@ export const productReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        products: state.products.filter((p) => p.id !== action.payload),
+        products: state.products.filter((p) => p._id !== action.payload),
       };
 
     case READ_PRODUCTS_FAILURE:

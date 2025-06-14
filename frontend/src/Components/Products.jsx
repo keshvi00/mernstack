@@ -38,7 +38,9 @@ const Products = () => {
   };
 
   const handleSubmit = (productData) => {
-    if (productData.id) {
+    console.log('Submitting product:', productData);
+
+    if (productData._id) {
       dispatch(updateProduct(productData));
     } else {
       dispatch(createProduct(productData));
@@ -56,7 +58,7 @@ const Products = () => {
 
       <Row>
         {products.map((product) => (
-          <Col md={4} key={product.id} className="mb-3">
+          <Col md={4} key={product._id} className="mb-3">
             <Card>
               <Card.Img variant="top" src={product.image} height="150" />
               <Card.Body>
@@ -73,7 +75,7 @@ const Products = () => {
                 <Button
                   variant="outline-danger"
                   size="sm"
-                  onClick={() => handleDelete(product.id)}
+                  onClick={() => handleDelete(product._id)}
                 >
                   <BsTrash /> Delete
                 </Button>
