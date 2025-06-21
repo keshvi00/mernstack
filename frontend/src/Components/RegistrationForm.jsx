@@ -30,7 +30,10 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const response = await axios.post(import.meta.env.VITE_API_BASE_URL + '/users/register', values);
+      const response = await axios.post(
+        import.meta.env.VITE_API_BASE_URL + '/auth/register',
+        values
+      );
       setMessage({ type: 'success', text: '🎉 Registration successful!' });
       resetForm();
     } catch (error) {

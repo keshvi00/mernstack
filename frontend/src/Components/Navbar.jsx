@@ -24,6 +24,9 @@ function AppNavbar() {
             <Nav.Link as={Link} to="/register" className="mx-2 fw-semibold text-dark">
               Register
             </Nav.Link>
+            <Nav.Link as={Link} to="/login" className="mx-2 fw-semibold text-dark">
+              Login
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

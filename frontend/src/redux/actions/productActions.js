@@ -9,10 +9,17 @@ import { toast } from 'react-toastify';
 
 const API_URL = import.meta.env.VITE_API_BASE_URL + '/products';
 
+const getAuthHeaders = () => ({
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${localStorage.getItem('token')}`,
+});
+
 export const fetchProducts = () => async (dispatch) => {
   dispatch({ type: READ_PRODUCTS_REQUEST });
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL, {
+      headers: getAuthHeaders()
+    });
     const data = await res.json();
     dispatch({ type: READ_PRODUCTS_SUCCESS, payload: data });
   } catch (err) {
@@ -26,7 +33,7 @@ export const createProduct = (product) => async (dispatch) => {
   try {
     const res = await fetch(API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(product),
     });
     const data = await res.json();
@@ -43,7 +50,7 @@ export const updateProduct = (product) => async (dispatch) => {
   try {
     const res = await fetch(`${API_URL}/${product._id}`, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: getAuthHeaders(),
       body: JSON.stringify(product),
     });
     const data = await res.json();
@@ -58,7 +65,10 @@ export const updateProduct = (product) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   dispatch({ type: DELETE_PRODUCT_REQUEST });
   try {
-    await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    await fetch(`${API_URL}/${id}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders()
+    });
     dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: id });
     toast.success('Product deleted successfully');
   } catch (err) {
