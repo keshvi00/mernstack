@@ -19,8 +19,8 @@ app.use(express.json());
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => console.log('✅ Connected to MongoDB'))
-  .catch((err) => console.error('❌ MongoDB connection failed:', err));
+}).then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('MongoDB connection failed:', err));
 
 const authRoutes = require('./routes/user');
 const productRoutes = require('./routes/product');
@@ -33,5 +33,5 @@ app.get('/api/ping', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

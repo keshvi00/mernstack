@@ -22,11 +22,11 @@ const LoginForm = () => {
       
       localStorage.setItem('token', response.data.token);
 
-      setMessage({ type: 'success', text: '✅ Login successful!' });
+      setMessage({ type: 'success', text: ' Login successful!' });
     } catch (error) {
       setMessage({
         type: 'error',
-        text: error.response?.data?.message || '❌ Login failed. Please check credentials.',
+        text: error.response?.data?.message || ' Login failed. Please check credentials.',
       });
     }
     setSubmitting(false);
