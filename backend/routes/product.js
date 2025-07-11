@@ -1,3 +1,142 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Products
+ *   description: Product management API
+ */
+
+/**
+ * @swagger
+ * /products:
+ *   get:
+ *     summary: Get all products
+ *     tags: [Products]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *       - in: query
+ *         name: sort
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: keyword
+ *         schema:
+ *           type: string
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Product list
+ */
+
+/**
+ * @swagger
+ * /products/{id}:
+ *   get:
+ *     summary: Get product by ID
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Single product
+ *       404:
+ *         description: Not found
+ */
+
+/**
+ * @swagger
+ * /products:
+ *   post:
+ *     summary: Create a new product
+ *     tags: [Products]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       201:
+ *         description: Product created
+ */
+
+/**
+ * @swagger
+ * /products/{id}:
+ *   put:
+ *     summary: Update a product
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Product updated
+ */
+
+/**
+ * @swagger
+ * /products/{id}:
+ *   delete:
+ *     summary: Delete a product
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Product deleted
+ */
+
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');

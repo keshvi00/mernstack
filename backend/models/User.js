@@ -5,7 +5,12 @@ const userSchema = new mongoose.Schema({
   fullName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: true, match: /^\d{10,15}$/ },
-  password: { type: String, required: true, minlength: 6 }
+  password: { type: String, required: true, minlength: 6 },
+  role: {
+    type: String,
+    enum: ['customer', 'admin'],
+    default: 'customer', 
+  },
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
